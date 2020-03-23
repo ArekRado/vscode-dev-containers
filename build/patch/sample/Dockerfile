@@ -7,7 +7,7 @@ ARG ORIGINAL_IMAGE=devcon.azurecr.io/public/vscode/devcontainers/base:0.45.1-ubu
 FROM ${ORIGINAL_IMAGE}
 
 RUN apt-get update  \
-    && apt-get upgrade -y sudo \
+    && apt-get -y upgrade -y sudo \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*

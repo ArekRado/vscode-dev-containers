@@ -5,9 +5,11 @@
 
 FROM REPLACE-ME
 
-# ** [Optional] Uncomment this section to install additional packages. **
-#
-# RUN yum -y install <your-package-list-here> \
-#     # 
-#     # Clean up
-#     && yum clean all
+# Get latest security patches, install packages if needed
+RUN yum update -y \
+    #
+    # [Optional] Uncomment this section to install additional packages. 
+    # && yum -y install <your-package-list-here> \
+    # 
+    # Clean up
+    && yum clean all

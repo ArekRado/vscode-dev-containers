@@ -9,9 +9,6 @@ FROM debian:9
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Docker Compose version
-ARG COMPOSE_VERSION=1.24.0
-
 # The node image includes a non-root user with sudo access. Use the 
 # "remoteUser" property in devcontainer.json to use it. On Linux, update 
 # these values to ensure the container user's UID/GID matches your local values.
@@ -20,8 +17,12 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Docker Compose version
+ARG COMPOSE_VERSION=1.24.0
+
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools installed

@@ -19,7 +19,7 @@ if [ "$(id -u)" -ne 0 ]; then
 fi
 
 # Update to latest versions of packages
-yum upgrade -y
+yum update -y
 
 # Install common dependencies
 yum install -y \

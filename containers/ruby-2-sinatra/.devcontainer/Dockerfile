@@ -13,6 +13,7 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Install vim, git, process tools, lsb-release

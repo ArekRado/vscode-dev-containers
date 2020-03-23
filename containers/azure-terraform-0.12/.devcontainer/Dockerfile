@@ -6,9 +6,6 @@
 # Pick any base image, but if you select node, skip installing node. 😊
 FROM debian:9
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Terraform and tflint versions
 ARG TERRAFORM_VERSION=0.12.16
 ARG TFLINT_VERSION=0.8.2
@@ -20,6 +17,9 @@ ARG TFLINT_VERSION=0.8.2
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Configure apt and install packages
 RUN apt-get update \

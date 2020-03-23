@@ -7,7 +7,7 @@ ARG ORIGINAL_IMAGE=devcon.azurecr.io/public/vscode/devcontainers/base:0.99.2-bus
 FROM ${ORIGINAL_IMAGE}
 
 RUN apt-get update  \
-    && apt-get upgrade -y libidn2-0 \
+    && apt-get -y upgrade -y libidn2-0 \
     && apt-get autoremove -y \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*

@@ -25,6 +25,7 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
+   && apt-get -y upgrade \
    && apt-get -y install --no-install-recommends software-properties-common ocaml \
    && apt-add-repository ppa:fish-shell/release-3 \
    && apt-get -y install --no-install-recommends fish \
@@ -34,6 +35,3 @@ RUN apt-get update \
    && apt-get clean -y \
    && rm -rf /var/lib/apt/lists/*
 ENV DEBIAN_FRONTEND=dialog
-
-# Uncomment to default to non-root user
-# USER $USER_UID

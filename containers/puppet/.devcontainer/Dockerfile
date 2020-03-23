@@ -15,6 +15,7 @@ ADD https://apt.puppetlabs.com/puppet6-release-xenial.deb /puppet6-release-xenia
 RUN dpkg -i /puppet6-release-xenial.deb
 
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install git openssh-client less iproute2 procps pdk \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.

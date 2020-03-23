@@ -1,9 +1,6 @@
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -28,8 +25,12 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false \
 
 ENV FUNCTIONS_WORKER_RUNTIME=powershell
 
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     && apt install -y /tmp/powershell.deb \
     #

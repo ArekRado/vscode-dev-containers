@@ -18,6 +18,7 @@ ARG USER_GID=$USER_UID
 
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     #
     # Install Azure Functions, .NET Core, and Azure CLI
     && echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" > /etc/apt/sources.list.d/azure-cli.list \

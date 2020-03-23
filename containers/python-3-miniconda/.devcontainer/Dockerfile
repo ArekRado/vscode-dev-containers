@@ -5,9 +5,6 @@
 
 FROM continuumio/miniconda3
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -20,8 +17,12 @@ ARG USER_GID=$USER_UID
 # copy "noop.txt" so the COPY instruction does not fail if no environment.yml exists.
 COPY environment.yml* .devcontainer/noop.txt /tmp/conda-tmp/
 
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed

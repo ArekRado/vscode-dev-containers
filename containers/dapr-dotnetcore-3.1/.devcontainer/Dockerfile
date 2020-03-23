@@ -29,6 +29,7 @@ ARG COMPOSE_VERSION=1.24.0
 
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed

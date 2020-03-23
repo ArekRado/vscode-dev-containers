@@ -3,12 +3,7 @@
 # Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
 #-------------------------------------------------------------------------------------------------------------
 
-# Update this to FROM python:3 if you'd prefer 
-# to use standard python instead
 FROM continuumio/anaconda3
-
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
 
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
@@ -18,8 +13,12 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, required tools installed
@@ -35,6 +34,8 @@ RUN apt-get update \
         gnupg-agent \
         software-properties-common \
         sudo \
+        gcc \
+        g++ \
         lsb-release 2>&1 \
     #
     # Install Docker CLI

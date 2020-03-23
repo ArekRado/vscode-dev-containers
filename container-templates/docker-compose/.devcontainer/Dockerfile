@@ -10,9 +10,6 @@
 
 FROM debian:9
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # This Dockerfile adds a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -33,6 +30,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog wget ca-certificates 2>&1 \
     #
     # Verify git, common tools / libs installed, add/modify non-root user, optionally install zsh

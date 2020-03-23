@@ -5,9 +5,6 @@
 
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:12
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Configuring Elm version
 ARG ELM_VERSION=latest-0.19.1
 ARG ELM_TEST_VERSION=latest-0.19.1
@@ -20,6 +17,9 @@ ARG ELM_FORMAT_VERSION=latest-0.19.1
 ARG USERNAME=node
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Install elm, elm-test and elm-format
 RUN sudo -u ${USERNAME} npm install --global \

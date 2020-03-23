@@ -5,9 +5,6 @@
 
 FROM node:12
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # The node image includes a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -19,8 +16,12 @@ ARG USER_GID=$USER_UID
 # Docker Compose version
 ARG COMPOSE_VERSION=1.24.0
 
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \ 
     #
     # Verify git and needed tools are installed
@@ -41,7 +42,7 @@ RUN apt-get update \
     && wget -q https://raw.githubusercontent.com/dapr/cli/master/install/install.sh -O - | /bin/bash \
     #
     # Remove outdated yarn from /opt and install via package 
-    # so it can be easily updated via apt-get upgrade yarn
+    # so it can be easily updated via apt-get -y upgrade yarn
     && rm -rf /opt/yarn-* \
     && rm -f /usr/local/bin/yarn \
     && rm -f /usr/local/bin/yarnpkg \

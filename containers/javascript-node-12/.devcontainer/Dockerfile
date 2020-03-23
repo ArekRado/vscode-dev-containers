@@ -5,9 +5,6 @@
 
 FROM node:12
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # The node image includes a non-root user with sudo access. Use the "remoteUser"
 # property in devcontainer.json to use it. On Linux, the container user's GID/UIDs
 # will be updated to match your local UID/GID (when using the dockerFile property).
@@ -39,7 +36,7 @@ RUN apt-get update \
     && rm /tmp/common-setup.sh \
     #
     # Remove outdated yarn from /opt and install via package 
-    # so it can be easily updated via apt-get upgrade yarn
+    # so it can be easily updated via apt-get -y upgrade yarn
     && rm -rf /opt/yarn-* \
     && rm -f /usr/local/bin/yarn \
     && rm -f /usr/local/bin/yarnpkg \

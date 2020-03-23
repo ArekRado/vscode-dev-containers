@@ -7,9 +7,6 @@
 # Note: You can use any Debian/Ubuntu based image you want. 
 FROM debian:9
 
-# Avoid warnings by switching to noninteractive
-ENV DEBIAN_FRONTEND=noninteractive
-
 # Docker Compose version
 ARG COMPOSE_VERSION=1.24.0
 
@@ -21,8 +18,12 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+# Avoid warnings by switching to noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
+
 # Configure apt and install packages
 RUN apt-get update \
+    && apt-get -y upgrade \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
     #
     # Verify git, process tools installed
